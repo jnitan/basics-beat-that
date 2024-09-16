@@ -76,6 +76,24 @@ var getPlayerScore = function (playerInput) {
   return `Player ${currentPlayer}, your chosen value is ${playerScore}`;
 };
 
+var comparePlayersScores = function () {
+  var compareMessage = `Player 1 score: ${allPlayerScore[0]} <br>Player 2 score: ${allPlayerScore[1]}`;
+
+  // If Player 1 wins
+  if (allPlayerScore[0] > allPlayerScore[1]) {
+    compareMessage = compareMessage + `<br><br> Player 1 wins!`;
+  }
+  // If Player 2 wins
+  if (allPlayerScore[0] < allPlayerScore[1]) {
+    compareMessage = compareMessage + `<br><br> Player 2 wins!`;
+  }
+  // If it's a draw
+  if (allPlayerScore[0] == allPlayerScore[1]) {
+    compareMessage = compareMessage + `<br><br> It's a tie!`;
+  }
+  return compareMessage;
+};
+
 var resetGame = function () {
   console.log("Check game state with Submit click:", gameState);
   console.log("Check current player when Submit click:", currentPlayer);
@@ -118,20 +136,9 @@ var main = function (input) {
   }
   if (gameState == gameStateCompareScores) {
     console.log("game state == game state compare score");
-    outputMessage = `Player 1 score: ${allPlayerScore[0]} <br>Player 2 score: ${allPlayerScore[1]}`;
 
-    // If Player 1 wins
-    if (allPlayerScore[0] > allPlayerScore[1]) {
-      outputMessage = outputMessage + `<br><br> Player 1 wins!`;
-    }
-    // If Player 2 wins
-    if (allPlayerScore[0] < allPlayerScore[1]) {
-      outputMessage = outputMessage + `<br><br> Player 2 wins!`;
-    }
-    // If it's a draw
-    if (allPlayerScore[0] == allPlayerScore[1]) {
-      outputMessage = outputMessage + `<br><br> It's a tie!`;
-    }
+    outputMessage = compareMessage();
+
     // Reset the game
     resetGame();
     return outputMessage;
